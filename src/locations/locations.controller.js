@@ -2,9 +2,12 @@
 // Business-Logic layer
 
 const router = require("express").Router();
+const cors = require("cors")
 const locationsService = require("./locations.service");
 const authorizationMiddleware = require("../authorization/authorization.middleware");
 const httpErrorHelper = require("../custom-errors/http-error.helper");
+
+router.use(cors({origin: '*'}))
 
 async function controllerCreateOneLocation(req, res) {
   const newLocation = await locationsService.createOne(req.body);
@@ -18,6 +21,7 @@ router.post(
 );
 
 async function controllerGetAllLocations(req, res) {
+  console.log(req);
   const limit = req.query.limit || 20;
   const offset = req.query.offset || 0;
   const locations = await locationsService.findAll(limit, offset);

@@ -4,6 +4,7 @@ const httpErrorHelper = require("../custom-errors/http-error.helper");
 const router = require("express").Router();
 
 async function controllerRegisterUser(req, res, next) {
+  console.log(req.body);
   try {
     const newUser = await usersService.createOne(req.body);
     return res.status(201).json(newUser);
